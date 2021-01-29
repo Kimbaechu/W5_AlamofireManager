@@ -18,7 +18,7 @@ class APIManager {
     }()
     
     func getPost(board: String, post: String, completion: @escaping (SinglePost?) -> Void) {
-        sessionManager.request(Router.getPost(board: board, post: post))
+        sessionManager.request(Router.getPost(board, post))
             .responseDecodable(of: SinglePost.self) { response in
                 guard let singlePost = response.value else {
                     return completion(nil)
@@ -27,25 +27,28 @@ class APIManager {
             }
     }
     
-    func addPost(board: String, title: String, content: String, completion: @escaping (AFDataResponse<Data?>) -> Void) {
+    func addPost(board: String, parameters: [String: String], completion: @escaping (AFDataResponse<Data?>) -> Void) {
         print(#function)
-        sessionManager.request(Router.addPost(board: board, title: title, content: content))
+        sessionManager.request(Router.addPost(board, parameters))
             .response { response in
                 completion(response)
             }
     }
     
-    func editPost(board: String, post: String, title: String, content: String, completion: @escaping (AFDataResponse<Data?>) -> Void) {
-        sessionManager.request(Router.editPost(board: board, post: post, title: title, content: content))
+    func editPost(board: String, post: String, parameters: [String: String], completion: @escaping (AFDataResponse<Data?>) -> Void) {
+        sessionManager.request(Router.editPost(board, post, parameters))
             .response { response in
                 completion(response)
             }
     }
     
     func deletePost(board: String, post: String, completion: @escaping (AFDataResponse<Data?>) -> Void) {
-        sessionManager.request(Router.deletePost(board: board, post: post))
+        sessionManager.request(Router.deletePost(board, post))
             .response { response in
                 completion(response)
             }
     }
+    
+   
+    
 }

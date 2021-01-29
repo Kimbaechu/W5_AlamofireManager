@@ -34,8 +34,14 @@ class ViewController: UIViewController {
         guard let boardNum = boardNumberField.text,
               let title = titleTextField.text,
               let content = contentTextView.text else { return }
-//        postTest(board: boardNum, title: title, content: content)
-        addPost(board: boardNum, title: title, content: content)
+
+        let param = [
+            "title" : title,
+            "content": content,
+            "anonymous": "0"
+        ]
+        
+        addPost(board: boardNum, parameters: param)
     }
     
     @IBAction func putButtonTapped(_ sender: Any) {
@@ -44,7 +50,12 @@ class ViewController: UIViewController {
               let title = titleTextField.text,
               let content = contentTextView.text else { return }
         
-        editPost(board: boardNum, post: postNum, title: title, content: content)
+        let param = [
+            "title" : title,
+            "content": content
+        ]
+        
+        editPost(board: boardNum, post: postNum, parameters: param)
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
@@ -63,8 +74,8 @@ class ViewController: UIViewController {
         }
     }
     
-    func addPost(board: String, title: String, content: String) {
-        APIManager.shared.addPost(board: board, title: title, content: content) { [weak self] response in
+    func addPost(board: String, parameters: [String: String]) {
+        APIManager.shared.addPost(board: board, parameters: parameters) { [weak self] response in
             if let data = response.data {
                 print(String(data: data, encoding: .utf8) ?? "")
             }
@@ -72,8 +83,8 @@ class ViewController: UIViewController {
         }
     }
     
-    func editPost(board: String, post: String, title: String, content: String) {
-        APIManager.shared.editPost(board: board, post: post, title: title, content: content) { [weak self] response in
+    func editPost(board: String, post: String, parameters: [String: String]) {
+        APIManager.shared.editPost(board: board, post: post, parameters: parameters) { [weak self] response in
             if let data = response.data {
                 print(String(data: data, encoding: .utf8) as Any)
             }

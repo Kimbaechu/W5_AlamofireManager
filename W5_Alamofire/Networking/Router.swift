@@ -8,13 +8,13 @@
 import Foundation
 import Alamofire
 
-let token = "non-public"
+let token = "835203117e6c49d84e6f938d3ac19d1f12fb50030dacd09ed6dba8407666c5b4"
 
 enum Router {
-    case getPost(board: String, post: String)
-    case addPost(board: String, title: String, content: String)
-    case editPost(board: String, post: String, title: String, content: String)
-    case deletePost(board: String, post: String)
+    case getPost(String, String)
+    case addPost(String, [String: String])
+    case editPost(String, String, [String: String])
+    case deletePost(String, String)
     
     var baseURL: String {
         switch self {
@@ -25,11 +25,11 @@ enum Router {
     
     var path: String {
         switch self {
-        case .getPost(board: let boardNum, post: let postNum),
-             .editPost(board: let boardNum, post: let postNum, title: _, content: _),
-             .deletePost(board: let boardNum, post: let postNum):
+        case .getPost(let boardNum, let postNum),
+             .editPost(let boardNum, let postNum, _),
+             .deletePost(let boardNum, let postNum):
             return "/boards/\(boardNum)/posts/\(postNum)"
-        case .addPost(board: let boardNum, title: _, content: _):
+        case .addPost(let boardNum, _):
             return "/boards/\(boardNum)/posts"
         }
     }
@@ -51,12 +51,13 @@ enum Router {
         switch self {
         case .getPost:
             return nil
-        case .addPost(board: _, title: let title, content: let content):
-            return ["title": title, "content": content, "anonymous": "0"]
-        case .editPost(board: _, post: _, title: let title, content: let content):
-            return ["title": title, "content": content]
+        case .addPost(_, let param):
+            return param
+        case .editPost(_,  _, let param):
+            return param
         case .deletePost:
             return nil
+       
         }
     }
 }
