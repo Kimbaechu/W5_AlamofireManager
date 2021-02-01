@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-let token = "835203117e6c49d84e6f938d3ac19d1f12fb50030dacd09ed6dba8407666c5b4"
+let token = "835203117e6c49d84e6f938d3ac19d1f12fb50030dacd09ed6dba8407666c5b"
 
 enum Router {
     case getPost(String, String)

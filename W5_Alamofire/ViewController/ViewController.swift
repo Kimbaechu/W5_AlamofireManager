@@ -101,27 +101,27 @@ class ViewController: UIViewController {
         }
     }
     
-    func postTest(board: String, title: String, content: String) {
-        
-        let headers: HTTPHeaders = [
-            "Authorization": token,
-            "Origin": "application/x-www-form-urlencoded",
-            "X-Requested-With": "application/x-www-form-urlencoded",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/x-www-form-urlencoded"
-        ]
-        
-        let parameters: [String: String] = [
-            "title": title,
-            "content": content,
-            "anonymous": "0"
-        ]
-        
-        AF.request("http://api.pandagom.kr/v1/boards/\(board)/posts", method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder.default, headers: headers)
-            .validate()
-            .responseJSON { AFData in
-                print(String(data: AFData.data!, encoding: .utf8)!)
-            }
-    }
+//    func postTest(board: String, title: String, content: String) {
+//
+//        let headers: HTTPHeaders = [
+//            "Authorization": token,
+//            "Origin": "application/x-www-form-urlencoded",
+//            "X-Requested-With": "application/x-www-form-urlencoded",
+//            "Content-Type": "application/x-www-form-urlencoded",
+//            "Accept": "application/x-www-form-urlencoded"
+//        ]
+//
+//        let parameters: [String: String] = [
+//            "title": title,
+//            "content": content,
+//            "anonymous": "0"
+//        ]
+//
+//        AF.request("http://api.pandagom.kr/v1/boards/\(board)/posts", method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder.default, headers: headers)
+//            .validate()
+//            .responseJSON { AFData in
+//                print(String(data: AFData.data!, encoding: .utf8)!)
+//            }
+//    }
 }
 

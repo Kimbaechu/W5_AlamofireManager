@@ -28,7 +28,6 @@ class APIManager {
     }
     
     func addPost(board: String, parameters: [String: String], completion: @escaping (AFDataResponse<Data?>) -> Void) {
-        print(#function)
         sessionManager.request(Router.addPost(board, parameters))
             .response { response in
                 completion(response)
@@ -48,7 +47,5 @@ class APIManager {
                 completion(response)
             }
     }
-    
-   
-    
+      
 }
